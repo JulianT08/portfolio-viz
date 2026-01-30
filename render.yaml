@@ -1,15 +1,10 @@
-# Render Blueprint - One-click deployment
-# https://render.com/docs/blueprint-spec
-
 services:
-  # Web Service (Backend + Frontend)
   - type: web
     name: portfolio-vault
-    env: node
-    region: oregon
+    runtime: node
     plan: free
-    buildCommand: cd backend && npm install
-    startCommand: cd backend && npm start
+    buildCommand: npm install
+    startCommand: node server.js
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV
@@ -22,9 +17,7 @@ services:
           property: connectionString
 
 databases:
-  # PostgreSQL Database
   - name: portfolio-db
     plan: free
-    region: oregon
     databaseName: portfolio
     user: portfolio_user
